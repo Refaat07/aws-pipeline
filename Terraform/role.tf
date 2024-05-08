@@ -27,7 +27,7 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution_policy" {
 
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
-  bucket = "iti-terraform-cloud-pd44"
+  bucket = "terraform-mrefaat"
 
   lambda_function {
     lambda_function_arn = aws_lambda_function.send_email_lambda.arn
