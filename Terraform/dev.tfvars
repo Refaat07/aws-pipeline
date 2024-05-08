@@ -3,7 +3,7 @@
 # machine_type      ="t2.micro"
 vpc_cidr          = "10.0.0.0/16"
 region            = "us-east-1"
-ses_email_reciever = "@example.com"
+ses_email_reciever = "m_refaat1612@yahoo.com"
 machine_details={
     type="t2.micro",
     public_ip=true
