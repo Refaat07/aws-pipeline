@@ -40,5 +40,5 @@ resource "aws_lambda_permission" "allow_bucket" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.send_email_lambda.function_name
   principal     = "s3.amazonaws.com"
-  source_arn    = "arn:aws:s3:::iti-terraform-cloud-pd44"
+  source_arn    = "arn:aws:s3:::terraform-mrefaat"
 }
