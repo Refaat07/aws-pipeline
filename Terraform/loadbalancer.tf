@@ -43,8 +43,8 @@ resource "aws_lb" "my_load_balancer" {
   load_balancer_type = "application"
 
   subnets            = [
-    module.network_module.subnets["public1"].id,
-    module.network_module.subnets["public2"].id
+    module.network_module.subnets["public_subnet_I"].id,
+    module.network_module.subnets["public_subnet_II"].id
   ] 
   tags = {
     Name = "${var.common_resource_name}_ALB"
