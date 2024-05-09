@@ -1,7 +1,7 @@
 resource "aws_security_group" "allow_ssh_public" {
   name        = "allow_ssh_public"
   description = "security group to allow ssh connection"
-  vpc_id      = module.network.vpc.id
+  vpc_id      = module.network_module.vpc.id
 
   ingress {
     description = "ssh from outside"
@@ -27,7 +27,7 @@ resource "aws_security_group" "allow_ssh_public" {
 resource "aws_security_group" "allow_ssh_private" {
   name        = "allow_ssh_private"
   description = "security group to allow ssh connection"
-  vpc_id      = module.network.vpc.id
+  vpc_id      = module.network_module.vpc.id
 
   # allow ssh from vpc cidr_block
   ingress {
