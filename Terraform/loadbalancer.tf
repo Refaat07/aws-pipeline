@@ -3,7 +3,7 @@ resource "aws_lb_target_group" "my_target_group" {
   name     = "my-target-group"
   port     = 3000 
   protocol = "HTTP"
-  vpc_id   = module.network.vpc.id
+  vpc_id   = module.network_module.vpc.id
 
   health_check {
     path                = "/"
@@ -43,8 +43,8 @@ resource "aws_lb" "my_load_balancer" {
   load_balancer_type = "application"
 
   subnets            = [
-    module.network.subnets["public1"].id,
-    module.network.subnets["public2"].id
+    module.network_module.subnets["public1"].id,
+    module.network_module.subnets["public2"].id
   ] 
   tags = {
     Name = "${var.common_resource_name}_ALB"
