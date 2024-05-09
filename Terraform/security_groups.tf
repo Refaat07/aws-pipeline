@@ -37,4 +37,4 @@ resource "aws_security_group" "allow_ssh_private" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+}
