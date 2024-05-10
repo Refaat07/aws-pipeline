@@ -1,15 +1,13 @@
 pipeline {
-    agent {
-        label 'private-ec2-slave'
-    }
+    agent { label 'ec2priv' }
     environment {
         DOCKER_IMAGE = 'nodejs_app'
-        RDS_HOSTNAME = credentials('rds_hostname')
-        RDS_USERNAME = credentials('rds_username')
-        RDS_PASSWORD = credentials('rds_password')
-        RDS_PORT = credentials('rds_port')
-        REDIS_HOSTNAME = credentials('redis_hostname')
-        REDIS_PORT = credentials('redis_port')
+        RDS_HOSTNAME = credentials('RDS-hostname')
+        RDS_USERNAME = credentials('RDS-username')
+        RDS_PASSWORD = credentials('RDS-password')
+        RDS_PORT = credentials('RDS-port')
+        REDIS_HOSTNAME = credentials('redis-hostname')
+        REDIS_PORT = credentials('redis-port')
     }
     stages {
         stage('Clone Repository') {
