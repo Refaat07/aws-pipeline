@@ -1,14 +1,3 @@
-resource "tls_private_key" "rsa_generator" {
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
-resource "aws_key_pair" "public_key_pair" {
-  key_name   = "bastion-public-key"
-  public_key = tls_private_key.rsa_generator.public_key_openssh
-}
-
-resource "local_file" "private_key_file" {
-  filename = "private_key.pem"
-  content  = tls_private_key.rsa_generator.private_key_pem
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:bd2d372f9c54d3ef9a338d4657872bcbea237062d0eea92b31558d097e9161ef
+size 352

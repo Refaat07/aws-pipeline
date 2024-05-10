@@ -1,27 +1,3 @@
-variable "vpc_cidr" {
-  type        = string
-  description = "description"
-}
-
-variable "common_resource_name" {
-  type        = string
-  default= "Cloud_PD44"
-  description = "description"
-}
-
-variable "region" {
-  type        = string
-  description = "description"
-}
-
-
-variable "subnets_details" {
-  type        = list(object({
-    name = string,
-    cidr = string,
-    type = string,
-    az = string
-  }))
-  description = "description"
-}
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:c5b738568b58d9823069507c8a4b41e2fe9d7706311e004658e044faf59eda2b
+size 466
