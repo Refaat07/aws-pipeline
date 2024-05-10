@@ -24,6 +24,6 @@ pipeline {
             steps {
                 sh 'docker run -d -p 3000:3000 --env RDS_HOSTNAME --env RDS_USERNAME --env RDS_PASSWORD --env RDS_PORT --env REDIS_HOSTNAME --env REDIS_PORT $DOCKER_IMAGE'
             }
-        }
-    }
+        }
+    }
 }
