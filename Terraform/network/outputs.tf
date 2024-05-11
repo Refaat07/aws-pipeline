@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:88529e7d5c3d03521dfb7336fc735dd8331c121cd18736baaaecdb5a86b00606
-size 280
+output "vpc_id" {
+  value = aws_vpc.main.id
+  description = "description"
+}
+
+output "cidr_block" {
+  value = aws_vpc.main.cidr_block
+  description = "description"
+}
+
+output "subnets" {
+  value = aws_subnet.subnets
+  sensitive = true
+  description = "description"
+}

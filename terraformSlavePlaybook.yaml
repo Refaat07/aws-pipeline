@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d4f7d86bc93633532c6505536824cf4c268b31cd4b0d6c53a1add61675bbd8b1
-size 430
+---
+- hosts: all
+  name: Terraform Slave playbook
+  remote_user: ubuntu
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Update apt
+      apt:
+        update_cache: yes
+
+    - name: Install Java 11
+      package:
+        name: openjdk-11-jdk
+        state: present
+
+    - name: Install Terraform
+      snap:
+        name: terraform
+        classic: yes
+        state: present
+        channel: latest

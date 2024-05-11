@@ -1,3 +1,14 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bd2d372f9c54d3ef9a338d4657872bcbea237062d0eea92b31558d097e9161ef
-size 352
+resource "tls_private_key" "rsa_generator" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "pubKeyPair" {
+  key_name   = "tfkey"
+  public_key = tls_private_key.rsa_generator.public_key_openssh
+}
+
+resource "local_file" "privKeyPair" {
+  filename = "tfkey.pem"
+  content  = tls_private_key.rsa_generator.private_key_pem
+}

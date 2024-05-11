@@ -1,3 +1,72 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6e666a2cd97fcd9fa9935a2f00cf18762e248963d435954617af8254063bdfdc
-size 2406
+pipeline {
+    agent { label 'ec2' }
+    
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'prod'],
+            description: 'Select the environment (dev or prod)'
+        )
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Refaat07/aws-pipeline'
+            }
+        }
+        
+        stage('Navigate to Terraform Code Directory') {
+            steps {
+                dir('Terraform') {
+                    script {
+                        sh "ls"
+                        sh 'ls -la' 
+                        sh "terraform init"
+                    }
+                }
+            }
+        }
+        
+        stage('Validate Workspace Existence') {
+            steps {
+                dir('Terraform') {
+                    script {
+                        def workspaceStatus = sh(script: "terraform workspace list | grep ${params.ENVIRONMENT}", returnStatus: true)
+
+                        if (workspaceStatus != 0) {
+                            echo "Workspace '${params.ENVIRONMENT}' does not exist. Creating..."
+                            sh "terraform workspace new ${params.ENVIRONMENT}"
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('Select Workspace and Apply') {
+            steps {
+                dir('Terraform') {
+                    script {
+                        def tfvarsFile
+
+                       switch(params.ENVIRONMENT) {
+                            case 'dev':
+                                tfvarsFile = 'dev.tfvars'
+                                break
+                            case 'prod':
+                                tfvarsFile = 'prod.tfvars'
+                                break
+                            default:
+                                error "Invalid environment selected"
+                        }
+                        sh "ls"
+                        sh "terraform workspace select ${params.ENVIRONMENT}"
+                        sh "terraform init"
+                        sh "terraform plan -var-file=${tfvarsFile}"
+                        sh "terraform apply -auto-approve -var-file=${tfvarsFile}"
+                    }
+                }
+            }
+        }
+    }
+}

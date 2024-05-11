@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b7e07feeb5b629c4819010929a60acd614aee93dd11adf9d994e7aee61267579
-size 604
+variable "vpc_cidr" {
+  type        = string
+  description = "description"
+}
+
+variable "common_resource_name" {
+  type        = string
+  default= "mrefaat"
+  description = "description"
+}
+
+variable "region" {
+  type        = string
+  description = "description"
+}
+
+
+variable "machine_details" {
+  type        = object({
+    type = string,
+    public_ip = bool
+  })
+  description = "description"
+}
+
+
+variable subnets_details {
+  type        = list(object({
+    name = string,
+    cidr = string,
+    type = string,
+    az = string
+  }))
+  description = "description"
+}
+

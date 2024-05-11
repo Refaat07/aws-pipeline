@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:473e1c8bfda70674915088fdf70dceabb7d169c592bc75e9f936e6a9774c5f29
-size 385
+resource "aws_eip" "main_nat_eip" {
+  domain = "vpc"
+  tags = {
+    "Name" = "${var.common_resource_name}_EIP"
+  }
+}
+
+resource "aws_nat_gateway" "main_ngw" {
+  allocation_id = aws_eip.main_nat_eip.id
+  subnet_id     = aws_subnet.subnets["publicSubnet1"].id
+  depends_on    = [aws_internet_gateway.main_igw] 
+
+  tags = {
+    Name = "${var.common_resource_name}_NGW"
+  }
+}
